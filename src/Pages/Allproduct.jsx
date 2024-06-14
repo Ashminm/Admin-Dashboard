@@ -7,6 +7,8 @@ import Card from 'react-bootstrap/Card';
 import userImage from '../assets/person.jpg';
 import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Pagination from 'react-bootstrap/Pagination';
 
 function Allproduct() {
     const [products,setProducts]=useState([])
@@ -34,7 +36,8 @@ function Allproduct() {
         fetchProducts();
     },[])
 
-    console.log(products);
+    // console.log(products);
+    
   return (
     <div>
       {isLargeScreen ? (
@@ -51,7 +54,7 @@ function Allproduct() {
                     </div>
                 </div>
             </div>
-            <div className="p-5 ">
+            <div className="p-5 pb-2">
             <Table className='shadow rounded'>
                 <thead>
                     <tr>
@@ -82,15 +85,41 @@ function Allproduct() {
                   <td>{new Date(product.date).toLocaleDateString()}</td>
                   <td>
                     <div className="d-flex justify-content-around align-items-center bg-transparent">
-                      <span className="material-symbols-outlined bg-transparent" style={{ cursor: 'pointer' }}>edit</span>
-                      <span className="material-symbols-outlined bg-transparent text-danger" style={{ cursor: 'pointer' }}>cancel</span>
+                     
+                      <Link to={`/edit/${product._id}`} className='bg-transparent text-dark'> <span className="material-symbols-outlined bg-transparent" style={{ cursor: 'pointer' }}>edit</span> </Link>
+                      <span className="material-symbols-outlined bg-transparent text-danger" style={{ cursor: 'pointer' }} onClick={handleShow}>cancel</span>
                     </div>
                   </td>
                     </tr>
                     ))}
                     
                 </tbody>
+                <Modal
+            show={show}
+            onHide={handleClose}
+            animation={false}
+            centered
+            dialogClassName="modal-sm-custom"
+            aria-labelledby="delete-confirmation-modal"
+            backdropClassName="custom-modal-backdrop" 
+          >
+            <div className="custom-modal-content px-5 py-3 d-flex justify-content-center align-items-center">
+              <span className="material-symbols-outlined text-center" style={{ fontSize: '50px' }}>
+                warning
+              </span>
+            </div>
+            <div className="p-5 pt-0 text-center">
+              <p>Are you sure you want to delete this product?</p>
+              <Button className="btn btn-dark me-4 my-3" onClick={handleClose}>
+                No, Cancel
+              </Button>
+              <Button className="btn btn-danger">Yes, I'm sure</Button>
+            </div>
+          </Modal>
             </Table>
+            </div>
+            <div className="border p-3 d-flex align-items-center shadow" style={{position:'fixed',bottom:'13%',right:'7%',borderRadius:'50%',backgroundColor:'#e65050',cursor:'pointer'}}>
+            <Link className='bg-transparent text-decoration-none d-flex align-items-center' to={'/add'}><span class="material-symbols-outlined bg-transparent text-light">add</span></Link>
             </div>
         </div>
         
@@ -109,8 +138,8 @@ function Allproduct() {
                     </div>
                 </div>
             </div>
-            <div className="row p-4">
-      {products.map((product) => (
+            <div className="row p-4 pb-0">
+        {products.map((product) => (
         <div key={product.id} className="col-12 col-sm-6 col-md-4 mb-4">
           <Card style={{ width: '100%' }} className="shadow px-4">
             <p className='m-0 pt-3 bg-transparent'>{product.id}</p>
@@ -126,7 +155,7 @@ function Allproduct() {
               </p>
               <div className="d-flex justify-content-between align-items-center">
                 <Button className="btn btn-dark w-100 me-3 d-flex justify-content-center align-items-center">
-                  <span className="material-symbols-outlined bg-transparent">edit_note</span>
+                <Link to={'/edit'} className='bg-transparent text-light'> <span className="material-symbols-outlined bg-transparent" style={{ cursor: 'pointer' }}>edit</span> </Link>
                 </Button>
                 <Button
                   className="btn btn-danger w-100 d-flex justify-content-center align-items-center"
@@ -160,10 +189,22 @@ function Allproduct() {
             </div>
           </Modal>
         </div>
-      ))}
-    </div>
+        ))}
+        </div>
+        <div className="border p-3 d-flex align-items-center shadow" style={{position:'fixed',bottom:'15%',right:'8%',borderRadius:'50%',backgroundColor:'#e65050',cursor:'pointer'}}>
+        <Link className='bg-transparent text-decoration-none d-flex align-items-center' to={'/add'}><span class="material-symbols-outlined bg-transparent text-light">add</span></Link>
+            </div>
         </div>
       )}
+      <div className="d-flex justify-content-center">
+      <Pagination>
+        <Pagination.Prev />
+        <Pagination.Item>{1}</Pagination.Item>
+        <Pagination.Item>{2}</Pagination.Item>
+        <Pagination.Item>{3}</Pagination.Item>
+        <Pagination.Next />
+      </Pagination>
+      </div>
     </div>
   )
 }
