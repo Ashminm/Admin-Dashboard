@@ -1,0 +1,10 @@
+th{
+    font-size: 16px;
+    font-weight: 700;
+ 
+}
+
+  
+  .custom-modal-backdrop {
+    background-color: transparent !important; 
+  }
