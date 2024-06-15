@@ -119,7 +119,7 @@ function Allproduct() {
             </Table>
             </div>
             <div className="border p-3 d-flex align-items-center shadow" style={{position:'fixed',bottom:'13%',right:'7%',borderRadius:'50%',backgroundColor:'#e65050',cursor:'pointer'}}>
-            <Link className='bg-transparent text-decoration-none d-flex align-items-center' to={'/add'}><span class="material-symbols-outlined bg-transparent text-light">add</span></Link>
+            <Link className='bg-transparent text-decoration-none d-flex align-items-center' title='Add Product' to={'/add'}><span class="material-symbols-outlined bg-transparent text-light">add</span></Link>
             </div>
         </div>
         
