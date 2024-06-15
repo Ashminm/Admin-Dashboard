@@ -6,29 +6,26 @@ import {getProduct } from "../service/Api"
 function Editproduct() {
     const [product, setProduct] = useState(null); // State for the filtered product
     const { id } = useParams(); // Get the product ID from the URL
-    console.log(id);
-  
+    console.log('Product ID from URL:', id); // Added a clearer log message
+
     useEffect(() => {
-      const fetchProduct = async () => {
-        try {
-          const res = await getProduct();
-          if (res.status === 200) {
-            // Use find to get a single product
-            const foundProduct = res.data.find(item => item._id === id);
-            setProduct(foundProduct || null); // Set product or null if not found
-          } else {
-            console.error('Failed to fetch products:', res.status);
-          }
-        } catch (error) {
-          console.error('Error fetching product:', error);
-        }
-      };
-  
-      fetchProduct();
-    }, [id]); // Re-fetch if `id` changes
-  
-    // Console log for debugging
-    console.log(product);
+        const fetchProduct = async () => {
+            try {
+                const res = await getProduct(); // Ensure getProduct fetches the product list
+                if (res.status === 200) {
+                    // Use find to get a single product
+                    const foundProduct = res.data.find(item => item._id === id);
+                    setProduct(foundProduct || null); // Set product or null if not found
+                } else {
+                    console.error('Failed to fetch products:', res.status);
+                }
+            } catch (error) {
+                console.error('Error fetching product:', error);
+            }
+        };
+
+        fetchProduct();
+    },[id])
 
 
 
@@ -48,11 +45,11 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product name</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} defaultValue={product.title} placeholder='name' />
+                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='name' />
                         </div>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product description</label>
                         <div className="bg-transparent">
-                        <input type="text" className='w-100 py-4 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} defaultValue={product.description}   placeholder='description' />
+                        <input type="text" className='w-100 py-4 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}   placeholder='description' />
                         </div>
                     </div>
                 </div>
@@ -61,7 +58,7 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Brand name</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}defaultValue={product.barand}  placeholder='brand' />
+                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='brand' />
                         </div>
                     </div>
                 </div>
@@ -70,8 +67,8 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Category name</label>
                         <div className="mb-3 bg-transparent">
-                        <select name="" id="" className='form-control' defaultValue={product.category}>
-                            <option value="" className='text-secondary' defaultValue={product.category}>Choose a Category</option>
+                        <select name="" id="" className='form-control' >
+                            <option value="" className='text-secondary'>Choose a Category</option>
                         </select>
                         </div>
                     </div>
@@ -81,7 +78,7 @@ function Editproduct() {
                 <div className="border p-3 shadow bg-white mb-4" style={{borderRadius:'10px'}}>
                     <p className='bg-transparent'>Product Image</p>
                     <div className="">
-                        <img src={product.image} defaultValue={product.image} alt="" style={{width:'100%'}} />
+                        <img src="https://i.postimg.cc/k5VzKryG/file-1.png" alt="" style={{width:'100%'}} />
                     </div>
                     <div className="p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Upload image</label>
@@ -95,7 +92,7 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product price</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="number" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} defaultValue={product.price} placeholder='price' />
+                        <input type="number" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='price' />
                         </div>
                     </div>
                 </div>
