@@ -4,20 +4,18 @@ import {getProduct } from "../service/Api"
 
 
 function Editproduct() {
-    const [product, setProduct] = useState(null); // State for the filtered product
-    const { id } = useParams(); // Get the product ID from the URL
-    console.log('Product ID from URL:', id); // Added a clearer log message
+    const [preview, setPreview] = useState("");
+    const [product, setProduct] = useState(null); 
+    const { id } = useParams(); 
+    // console.log(id); 
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await getProduct(); // Ensure getProduct fetches the product list
+                const res = await getProduct(); 
                 if (res.status === 200) {
-                    // Use find to get a single product
                     const foundProduct = res.data.find(item => item._id === id);
-                    setProduct(foundProduct || null); // Set product or null if not found
-                } else {
-                    console.error('Failed to fetch products:', res.status);
+                    setProduct(foundProduct || null);
                 }
             } catch (error) {
                 console.error('Error fetching product:', error);
@@ -26,7 +24,7 @@ function Editproduct() {
 
         fetchProduct();
     },[id])
-
+console.log(product);
 
 
   return (
@@ -38,6 +36,7 @@ function Editproduct() {
             <h1>Edit Product</h1>
             <p>Edit your product</p>
         </div>
+        <form action="">
         <div className="row">
             <div className="col-lg-6 col-md-12 col-sm-12">
                 <div className="border p-3 shadow mb-4 bg-white" style={{borderRadius:'10px'}}>
@@ -45,11 +44,11 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product name</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='name' />
+                        <input type="text" defaultValue={product?.title} className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='name' />
                         </div>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product description</label>
                         <div className="bg-transparent">
-                        <input type="text" className='w-100 py-4 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}   placeholder='description' />
+                        <textarea rows={4} type="text" defaultValue={product?.description} className='w-100 py-2 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}   placeholder='description' ></textarea>
                         </div>
                     </div>
                 </div>
@@ -58,7 +57,7 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Brand name</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='brand' />
+                        <input type="text" defaultValue={product?.barand}  className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='brand' />
                         </div>
                     </div>
                 </div>
@@ -67,7 +66,7 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Category name</label>
                         <div className="mb-3 bg-transparent">
-                        <select name="" id="" className='form-control' >
+                        <select name="" id="" className='form-control'defaultValue={product?.category}  >
                             <option value="" className='text-secondary'>Choose a Category</option>
                         </select>
                         </div>
@@ -77,8 +76,12 @@ function Editproduct() {
             <div className="col-lg-6 col-md-12 col-sm-12">
                 <div className="border p-3 shadow bg-white mb-4" style={{borderRadius:'10px'}}>
                     <p className='bg-transparent'>Product Image</p>
-                    <div className="">
-                        <img src="https://i.postimg.cc/k5VzKryG/file-1.png" alt="" style={{width:'100%'}} />
+                    <div className="w-100 d-flex justify-content-center">
+                        <img
+                        //  src="https://i.postimg.cc/k5VzKryG/file-1.png"
+                        src={preview? preview : `${product?.image}`}
+                         className="img-fluid bg-transparent"
+                          alt="" style={{width:'50%'}} />
                     </div>
                     <div className="p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Upload image</label>
@@ -92,7 +95,7 @@ function Editproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product price</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="number" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='price' />
+                        <input type="number" defaultValue={product?.price}  className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}  placeholder='price' />
                         </div>
                     </div>
                 </div>
@@ -102,6 +105,7 @@ function Editproduct() {
                 </div>
             </div>
         </div>
+        </form>
     </div>
   )
 }

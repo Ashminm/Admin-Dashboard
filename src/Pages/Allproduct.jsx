@@ -155,7 +155,7 @@ function Allproduct() {
               </p>
               <div className="d-flex justify-content-between align-items-center">
                 <Button className="btn btn-dark w-100 me-3 d-flex justify-content-center align-items-center">
-                <Link to={'/edit'} className='bg-transparent text-light'> <span className="material-symbols-outlined bg-transparent" style={{ cursor: 'pointer' }}>edit</span> </Link>
+                <Link to={`/edit/${product._id}`} className='bg-transparent text-light'> <span className="material-symbols-outlined bg-transparent" style={{ cursor: 'pointer' }}>edit</span> </Link>
                 </Button>
                 <Button
                   className="btn btn-danger w-100 d-flex justify-content-center align-items-center"
