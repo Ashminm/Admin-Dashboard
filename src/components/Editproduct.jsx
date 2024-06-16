@@ -101,7 +101,6 @@ console.log(category);
                     <p className='bg-transparent'>Product Image</p>
                     <div className="w-100 d-flex justify-content-center">
                         <img
-                        //  src="https://i.postimg.cc/k5VzKryG/file-1.png"
                         src={preview? preview : `${product?.image}`}
                          className="img-fluid bg-transparent"
                           alt="" style={{width:'200px'}} />

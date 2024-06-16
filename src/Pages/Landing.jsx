@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Allproduct from './Allproduct';
+import Dashboard from './Dashboard';
 
 function Landing() {
   return (
@@ -62,7 +64,7 @@ function Landing() {
               role="tabpanel" 
               aria-labelledby="v-pills-home-tab"
             >
-              hiii
+              <Dashboard/>
             </div>
             <div 
               className="tab-pane fade" 
@@ -70,7 +72,7 @@ function Landing() {
               role="tabpanel" 
               aria-labelledby="v-pills-profile-tab"
             >
-              mmm
+              <Allproduct/>
             </div>
             <div 
               className="tab-pane fade" 

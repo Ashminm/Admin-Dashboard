@@ -42,7 +42,7 @@ function Allproduct() {
     <div>
       {isLargeScreen ? (
         <div className="">
-            <div className="px-5 pt-4 d-flex">
+            <div className="pt-4 d-flex">
                 <div className=" border py-3 px-4 d-flex shadow" style={{border:'1px solid back',borderRadius:'25px',backgroundColor:'#FFF',width:'82%'}}>
                 <span class="material-symbols-outlined bg-transparent">search</span>
                     <input type="search" className='w-100 border-0 ps-2 bg-transparent' style={{outline:'none'}} placeholder='Search your products...' />
@@ -54,7 +54,7 @@ function Allproduct() {
                     </div>
                 </div>
             </div>
-            <div className="p-5 pb-2">
+            <div className="p-5 px-1 pb-2">
             <Table className='shadow rounded'>
                 <thead>
                     <tr>
