@@ -6,6 +6,7 @@ import {getProduct } from "../service/Api"
 function Editproduct() {
     const [preview, setPreview] = useState("");
     const [product, setProduct] = useState(null); 
+    const [category,setCategory] = useState([])
     const { id } = useParams(); 
     // console.log(id); 
 
@@ -23,9 +24,24 @@ function Editproduct() {
         };
 
         fetchProduct();
+        const getCategory = async () => {
+            try {
+              const res = await getProduct();
+              if (res.status === 200) {
+                const products = res.data;
+                const uniqueCategories = [...new Set(products.map(product => product.category))];
+                setCategory(uniqueCategories);
+              }
+            } catch (error) {
+              console.error('Error fetching product:', error);
+            }
+          };
+      
+          getCategory();
     },[id])
-console.log(product);
+ 
 
+console.log(category);
 
   return (
     <div className='container-fluid px-4 py-3'>
@@ -66,8 +82,15 @@ console.log(product);
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Category name</label>
                         <div className="mb-3 bg-transparent">
-                        <select name="" id="" className='form-control'defaultValue={product?.category}  >
-                            <option value="" className='text-secondary'>Choose a Category</option>
+                        <select name="category" id="category-select" className="form-control" defaultValue={product?.category || ''}>
+                            <option value="" disabled className="text-secondary">
+                                Choose a Category
+                            </option>
+                                {category.map((cat, index) => (
+                                    <option key={index} value={cat}>
+                                    {cat}
+                            </option>
+                            ))}
                         </select>
                         </div>
                     </div>
@@ -81,7 +104,7 @@ console.log(product);
                         //  src="https://i.postimg.cc/k5VzKryG/file-1.png"
                         src={preview? preview : `${product?.image}`}
                          className="img-fluid bg-transparent"
-                          alt="" style={{width:'50%'}} />
+                          alt="" style={{width:'200px'}} />
                     </div>
                     <div className="p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Upload image</label>

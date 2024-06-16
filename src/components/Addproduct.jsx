@@ -22,7 +22,7 @@ function Addproduct() {
                         </div>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product description</label>
                         <div className="bg-transparent">
-                        <input type="text" className='w-100 py-4 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='description' />
+                        <textarea rows={4} type="text" className='w-100 py-2 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}   placeholder='description' ></textarea>
                         </div>
                     </div>
                 </div>

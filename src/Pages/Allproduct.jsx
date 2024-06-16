@@ -71,13 +71,13 @@ function Allproduct() {
                     {products.map((product)=>(
                     <tr className="align-middle">
                     <td className='ps-3'>{product.id}</td>
-                    <td style={{width:'250px'}}><div className="d-flex justify-content-start align-items-center bg-transparent py-3">
+                    <td style={{width:'280px'}}><div className="d-flex justify-content-start align-items-center bg-transparent py-3">
                     <span><img 
                       src={product.image} 
                       alt={product.title} 
                       style={{ width: '100%', height: '75px', objectFit: 'cover' }} 
                     /></span>
-                    <span className='bg-transparent'>{product.title}</span>
+                    <span className='bg-transparent ps-3'>{product.title}</span>
                     </div></td>
                   <td>{product.barand}</td>
                   <td>{product.category}</td>
