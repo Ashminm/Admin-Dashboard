@@ -71,21 +71,20 @@ function Allproduct() {
                     {products.map((product)=>(
                     <tr className="align-middle">
                     <td className='ps-3'>{product.id}</td>
-                    <div className="d-flex justify-content-start align-items-center py-3">
+                    <td style={{width:'250px'}}><div className="d-flex justify-content-start align-items-center bg-transparent py-3">
                     <span><img 
                       src={product.image} 
-                      alt={product.name} 
-                      style={{ width: '100%', height: '70px', objectFit: 'cover' }} 
+                      alt={product.title} 
+                      style={{ width: '100%', height: '75px', objectFit: 'cover' }} 
                     /></span>
                     <span className='bg-transparent'>{product.title}</span>
-                    </div>
+                    </div></td>
                   <td>{product.barand}</td>
                   <td>{product.category}</td>
                   <td>₹{product.price}</td>
                   <td>{new Date(product.date).toLocaleDateString()}</td>
                   <td>
                     <div className="d-flex justify-content-around align-items-center bg-transparent">
-                     
                       <Link to={`/edit/${product._id}`} className='bg-transparent text-dark'> <span className="material-symbols-outlined bg-transparent" style={{ cursor: 'pointer' }}>edit</span> </Link>
                       <span className="material-symbols-outlined bg-transparent text-danger" style={{ cursor: 'pointer' }} onClick={handleShow}>cancel</span>
                     </div>
@@ -118,8 +117,8 @@ function Allproduct() {
           </Modal>
             </Table>
             </div>
-            <div className="border p-3 d-flex align-items-center shadow" style={{position:'fixed',bottom:'13%',right:'7%',borderRadius:'50%',backgroundColor:'#e65050',cursor:'pointer'}}>
-            <Link className='bg-transparent text-decoration-none d-flex align-items-center' title='Add Product' to={'/add'}><span class="material-symbols-outlined bg-transparent text-light">add</span></Link>
+            <div className="p-3 d-flex align-items-center shadow btn btn-outline-danger" style={{position:'fixed',bottom:'13%',right:'7%',borderRadius:'50%',cursor:'pointer'}}>
+            <Link className='bg-transparent text-decoration-none d-flex align-items-center' title='Add Product' to={'/add'}><span class="material-symbols-outlined bg-transparent text-dark">add</span></Link>
             </div>
         </div>
         
