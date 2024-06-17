@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import {getProduct} from "../service/Api"
+import { addProduct } from '../service/Api';
 
 function Addproduct() {
     const [preview, setPreview] = useState("");
@@ -34,10 +35,24 @@ function Addproduct() {
             setPreview(URL.createObjectURL(addProduct.image));
         }
     }, [addProduct]);
-    
 
+    // console.log(addProduct);
 
-    console.log(addProduct);
+    const handleAddProduct=async()=>{
+        if(!addProduct.title || !addProduct.description || !addProduct.barand || !addProduct.category || !addProduct.price || !addProduct.image){
+            alert("Enter value to every filed!")
+        }else{
+            const productData=new FormData()
+            productData.append('title',addProduct.title)
+            productData.append('description',addProduct.description)
+            productData.append('barand',addProduct.barand)
+            productData.append('category',addProduct.category)
+            productData.append('price',addProduct.price)
+            productData.append('product_Image',addProduct.image)
+            console.log(productData);
+        }
+    }
+
   return (
     <div className='container-fluid px-4 py-3'>
         <div className='pt-4'>
@@ -114,7 +129,7 @@ function Addproduct() {
                     </div>
                 </div>
                 <div className="d-flex">
-                    <button className="btn btn-success w-100 me-3 py-2">Submit</button>
+                    <button className="btn btn-success w-100 me-3 py-2" onClick={handleAddProduct}>Submit</button>
                     <button className="btn btn-secondary w-100 py-2"><Link className='text-decoration-none bg-transparent text-light'>Cancel</Link></button>
                 </div>
             </div>

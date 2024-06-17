@@ -37,7 +37,7 @@ function Allproduct() {
     },[])
 
     // console.log(products);
-    
+      
   return (
     <div>
       {isLargeScreen ? (
@@ -142,7 +142,7 @@ function Allproduct() {
         <div key={product.id} className="col-12 col-sm-6 col-md-4 mb-4">
           <Card style={{ width: '100%' }} className="shadow px-4">
             <p className='m-0 pt-3 bg-transparent'>{product.id}</p>
-            <Card.Img variant="top" src={product.image} />
+            <Card.Img variant="top" src={product.image} alt={product.title}  />
           <div className="py-3 bg-transparent">
               <h1 className='bg-light bg-transparent'>{product.title}</h1>
               <p className="h3 mb-3 bg-transparent">{product.description.slice(0,100)}...</p>
