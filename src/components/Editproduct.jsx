@@ -41,8 +41,6 @@ function Editproduct() {
     },[id])
  
 
-console.log(category);
-
   return (
     <div className='container-fluid px-4 py-3'>
         <div className='pt-4'>

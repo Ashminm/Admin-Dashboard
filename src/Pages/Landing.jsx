@@ -3,10 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Allproduct from './Allproduct';
 import Dashboard from './Dashboard';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import './Landing.css'
+import { Container, Navbar } from 'react-bootstrap';
 
 function Landing() {
+  const isLargeScreen = useMediaQuery('(min-width:790px)');
   return (
-    <div className="container-fluid" style={{ padding: '20px' }}>
+    <div>
+      {
+        isLargeScreen ? (
+          <div className="container-fluid" style={{ padding: '20px' }}>
       <div className="row">
         
         <div className="col-lg-2 d-flex flex-column align-items-center ">
@@ -85,6 +92,14 @@ function Landing() {
           </div>
         </div>
       </div>
+    </div>
+        ) : (
+          
+         <div className="">
+          
+         </div>
+        )
+      }
     </div>
   );
 }

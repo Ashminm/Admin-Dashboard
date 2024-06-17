@@ -1,7 +1,43 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import {getProduct} from "../service/Api"
 
 function Addproduct() {
+    const [preview, setPreview] = useState("");
+    const [category,setCategory] = useState([])
+    const [addProduct,setAddProduct]= useState({
+        title:"",description:"",barand:"",category:"",price:"",image:null
+    })
+
+
+    useEffect(()=>{
+        setAddProduct()
+
+        const getCategory = async () => {
+            try {
+              const res = await getProduct();
+              if (res.status === 200) {
+                const products = res.data;
+                const uniqueCategories = [...new Set(products.map(product => product.category))];
+                setCategory(uniqueCategories);
+              }
+            } catch (error) {
+              console.error('Error fetching product:', error);
+            }
+          };
+      
+          getCategory();
+    },[])
+
+    useEffect(() => {
+        if (addProduct && addProduct.image) {
+            setPreview(URL.createObjectURL(addProduct.image));
+        }
+    }, [addProduct]);
+    
+
+
+    console.log(addProduct);
   return (
     <div className='container-fluid px-4 py-3'>
         <div className='pt-4'>
@@ -11,6 +47,7 @@ function Addproduct() {
             <h1>Add Product</h1>
             <p>Add product for your customer</p>
         </div>
+        <form >
         <div className="row">
             <div className="col-lg-6 col-md-12 col-sm-12">
                 <div className="border p-3 shadow mb-4 bg-white" style={{borderRadius:'10px'}}>
@@ -18,11 +55,11 @@ function Addproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product name</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='name' />
+                        <input type="text" onChange={(e)=>setAddProduct({...addProduct,title:e.target.value})}  className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='name' />
                         </div>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product description</label>
                         <div className="bg-transparent">
-                        <textarea rows={4} type="text" className='w-100 py-2 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}   placeholder='description' ></textarea>
+                        <textarea rows={4} type="text" onChange={(e)=>setAddProduct({...addProduct,description:e.target.value})} className='w-100 py-2 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}   placeholder='description' ></textarea>
                         </div>
                     </div>
                 </div>
@@ -31,7 +68,7 @@ function Addproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Brand name</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="text" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='brand' />
+                        <input type="text" onChange={(e)=>setAddProduct({...addProduct,barand:e.target.value})} className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='brand' />
                         </div>
                     </div>
                 </div>
@@ -40,8 +77,15 @@ function Addproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Category name</label>
                         <div className="mb-3 bg-transparent">
-                        <select name="" id="" className='form-control'>
-                            <option value="" className='text-secondary'>Choose a Category</option>
+                        <select name="" id="" className='form-control' onChange={(e)=>setAddProduct({...addProduct,category:e.target.value})}>
+                        <option value="" selected className="text-secondary">
+                                Choose a Category
+                            </option>
+                                {category.map((cat, index) => (
+                                    <option key={index} value={cat}>
+                                    {cat}
+                            </option>
+                            ))}
                         </select>
                         </div>
                     </div>
@@ -50,13 +94,13 @@ function Addproduct() {
             <div className="col-lg-6 col-md-12 col-sm-12">
                 <div className="border p-3 shadow bg-white mb-4" style={{borderRadius:'10px'}}>
                     <p className='bg-transparent'>Product Image</p>
-                    <div className="">
-                        <img src="https://i.postimg.cc/k5VzKryG/file-1.png" alt="" style={{width:'100%'}} />
+                    <div className="w-100 d-flex justify-content-center">
+                        <img src={preview ? preview : "https://i.postimg.cc/k5VzKryG/file-1.png"} alt="" className='p-5 px-3' style={{width:'70%'}} />
                     </div>
                     <div className="p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Upload image</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="file" className='w-100 py-1 px-3 bg-transparent text-secondary' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}/>
+                        <input type="file" onChange={(e)=>setAddProduct({...addProduct,image:e.target.files[0]})} className='w-100 py-1 px-3 bg-transparent text-secondary' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}}/>
                         </div>
                     </div>
                 </div>
@@ -65,7 +109,7 @@ function Addproduct() {
                     <div className="border p-3 bg-transparent" style={{borderRadius:'10px'}}>
                         <label htmlFor="" className='bg-transparent text-secondary'>Product price</label>
                         <div className="mb-3 bg-transparent">
-                        <input type="number" className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='price' />
+                        <input type="number" onChange={(e)=>setAddProduct({...addProduct,price:e.target.value})} className='w-100 py-1 px-3 bg-transparent' style={{borderRadius:'7px',outline:'none',border:'2px solid #bfbdbd'}} placeholder='price' />
                         </div>
                     </div>
                 </div>
@@ -75,6 +119,7 @@ function Addproduct() {
                 </div>
             </div>
         </div>
+        </form>
     </div>
   )
 }
