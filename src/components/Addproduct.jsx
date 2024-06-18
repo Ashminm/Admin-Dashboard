@@ -29,6 +29,7 @@ function Addproduct() {
       
           getCategory();
     },[])
+    // console.log(category);
 
     useEffect(() => {
         if (addProduct && addProduct.image) {
@@ -51,7 +52,9 @@ function Addproduct() {
         productData.append('category', addProduct.category);
         productData.append('price', addProduct.price);
         productData.append('product_Image', addProduct.image);
+
         console.log(productData);
+
 
         try {
             const res = await addProductsApi(productData);
