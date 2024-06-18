@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import {getProduct} from "../service/Api"
-import { addProduct } from '../service/Api';
+import { addProductsApi } from '../service/Api';
 
 function Addproduct() {
     const [preview, setPreview] = useState("");
@@ -38,19 +38,28 @@ function Addproduct() {
 
     // console.log(addProduct);
 
-    const handleAddProduct=async()=>{
-        if(!addProduct.title || !addProduct.description || !addProduct.barand || !addProduct.category || !addProduct.price || !addProduct.image){
-            alert("Enter value to every filed!")
-        }else{
-            const productData=new FormData()
-            productData.append('title',addProduct.title)
-            productData.append('description',addProduct.description)
-            productData.append('barand',addProduct.barand)
-            productData.append('category',addProduct.category)
-            productData.append('price',addProduct.price)
-            productData.append('product_Image',addProduct.image)
-            console.log(productData);
+    const handleAddProduct = async () => {
+        if (!addProduct.title || !addProduct.description || !addProduct.barand || !addProduct.category || !addProduct.price || !addProduct.image) {
+            alert("Please fill in all fields!");
+            return; 
         }
+
+        const productData = new FormData();
+        productData.append('title', addProduct.title);
+        productData.append('description', addProduct.description);
+        productData.append('barand', addProduct.barand);
+        productData.append('category', addProduct.category);
+        productData.append('price', addProduct.price);
+        productData.append('product_Image', addProduct.image);
+        console.log(productData);
+
+        try {
+            const res = await addProductsApi(productData);
+            console.log('Product added successfully:', res);
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }   
+        
     }
 
   return (
