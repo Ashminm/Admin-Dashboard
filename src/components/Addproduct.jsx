@@ -7,7 +7,7 @@ function Addproduct() {
     const [preview, setPreview] = useState("");
     const [category,setCategory] = useState([])
     const [addProduct,setAddProduct]= useState({
-        title:"",description:"",barand:"",category:"",price:"",image:null
+        title:"",description:"",barand:"",category:"",price:"",image:""
     })
 
 
@@ -64,6 +64,7 @@ function Addproduct() {
         }   
         
     }
+    // console.log(addProduct);
 
   return (
     <div className='container-fluid px-4 py-3'>
