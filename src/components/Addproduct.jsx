@@ -55,7 +55,6 @@ function Addproduct() {
 
         console.log(productData);
 
-
         try {
             const res = await addProductsApi(productData);
             console.log('Product added successfully:', res);
@@ -65,7 +64,6 @@ function Addproduct() {
         
     }
     // console.log(addProduct);
-
   return (
     <div className='container-fluid px-4 py-3'>
         <div className='pt-4'>

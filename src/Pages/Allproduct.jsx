@@ -9,6 +9,8 @@ import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-bootstrap/Pagination';
+import { BASE_URL } from '../service/baseUrl';
+
 
 function Allproduct() {
     const [products,setProducts]=useState([])
@@ -36,7 +38,7 @@ function Allproduct() {
         fetchProducts();
     },[])
 
-    // console.log(products);
+    console.log(products);
       
   return (
     <div>
@@ -73,7 +75,7 @@ function Allproduct() {
                     <td className='ps-3'>{product.id}</td>
                     <td style={{width:'280px'}}><div className="d-flex justify-content-start align-items-center bg-transparent py-3">
                     <span><img 
-                      src={product.image} 
+                     src={`${BASE_URL}/upload/${product.image}`}
                       alt={product.title} 
                       style={{ width: '100%', height: '75px', objectFit: 'cover' }} 
                     /></span>

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {getProduct } from "../service/Api"
-
+import { BASE_URL } from '../service/baseUrl';
 
 function Editproduct() {
     const [preview, setPreview] = useState("");
@@ -40,7 +40,7 @@ function Editproduct() {
           getCategory();
     },[id])
  
-
+console.log(product);
   return (
     <div className='container-fluid px-4 py-3'>
         <div className='pt-4'>
@@ -99,7 +99,7 @@ function Editproduct() {
                     <p className='bg-transparent'>Product Image</p>
                     <div className="w-100 d-flex justify-content-center">
                         <img
-                        src={preview? preview : `${product?.image}`}
+                        src={preview ? preview : `${BASE_URL}/Uploads/${product?.image}`}
                          className="img-fluid bg-transparent"
                           alt="" style={{width:'200px'}} />
                     </div>
