@@ -37,7 +37,7 @@ function Addproduct() {
         }
     }, [addProduct]);
 
-    // console.log(addProduct);
+    console.log(addProduct);
 
     const handleAddProduct = async () => {
         if (!addProduct.title || !addProduct.description || !addProduct.barand || !addProduct.category || !addProduct.price || !addProduct.image) {
@@ -53,7 +53,7 @@ function Addproduct() {
         productData.append('price', addProduct.price);
         productData.append('product_Image', addProduct.image);
 
-        console.log(productData);
+        // console.log(productData);
 
         try {
             const res = await addProductsApi(productData);

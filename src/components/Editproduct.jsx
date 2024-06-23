@@ -8,7 +8,7 @@ function Editproduct() {
     const [product, setProduct] = useState(null); 
     const [category,setCategory] = useState([])
     const { id } = useParams(); 
-    // console.log(id); 
+    console.log(id); 
 
     useEffect(() => {
         const fetchProduct = async () => {
